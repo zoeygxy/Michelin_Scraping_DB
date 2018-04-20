@@ -269,7 +269,6 @@ def init_second_table():
 
     statement = """
         CREATE TABLE 'Cities' (
-            'Id' INTEGER PRIMARY KEY AUTOINCREMENT,
             'City' TEXT NOT NULL,
             'Total' INTEGER NOT NULL,
             'Avg Rating' FLOAT NOT NULL,
@@ -306,18 +305,18 @@ def init_second_table():
     # insert into the table
     for city in city_detail:
         try:
-            insertion = (None, city, city_detail[city][0], city_detail[city][1],
+            insertion = (city, city_detail[city][0], city_detail[city][1],
                      city_detail[city][2], city_detail[city][3],
                      city_detail[city][4])
             statement = 'INSERT INTO "Cities"'
-            statement += 'VALUES(?, ?, ?, ?, ?, ?, ?)'
+            statement += 'VALUES(?, ?, ?, ?, ?, ?)'
             cur.execute(statement, insertion)
         except:
-            insertion = (None, city, city_detail[city][0], city_detail[city][1],
+            insertion = (city, city_detail[city][0], city_detail[city][1],
                      city_detail[city][2], city_detail[city][3],
                      0)
             statement = 'INSERT INTO "Cities"'
-            statement += 'VALUES(?, ?, ?, ?, ?, ?, ?)'
+            statement += 'VALUES(?, ?, ?, ?, ?, ?)'
             cur.execute(statement, insertion)
     conn.commit()
     print('Tables initialized successfully.')
