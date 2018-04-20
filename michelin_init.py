@@ -251,6 +251,7 @@ def init_db(rest_obj_list):
         cur.execute(statement, insertion)
     conn.commit()
 
+# Initialize the 'city' table.
 def init_second_table():
     conn = sqlite3.connect(DBNAME)
     cur = conn.cursor()
@@ -321,6 +322,7 @@ def init_second_table():
     conn.commit()
     print('Tables initialized successfully.')
 
+# The function that wraps up the functions for the first database
 def prepare_database():
     city_list = ['chicago', 'washington-dc', 'san-francisco', 'new-york']
     stars_list = [1, 2, 3]

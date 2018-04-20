@@ -5,6 +5,7 @@ import sqlite3
 
 DBNAME = 'michelin.db'
 
+# Generate Graph 1
 def generate_city_star_avg_rating(num):
     option = {1:"Chicago", 2:"New York City", 3:"San Francisco", 4:"Washington DC"}
     city_name = option[num]
@@ -28,10 +29,6 @@ def generate_city_star_avg_rating(num):
     else:
         distinctions = ['1 Star', '2 Stars', '3 Stars']
 
-
-    # plotly
-    #cities = ["Chicago", "New York City", "San Francisco", "Washington DC"]
-
     trace1 = go.Bar(
         x = distinctions,
         y = avg_ratings,
@@ -44,12 +41,12 @@ def generate_city_star_avg_rating(num):
     data = [trace1]
     layout = go.Layout(
         title = 'Average Ratings of Different Distinctions in {}'.format(city_name),
-        #xaxis=dict(tickangle=-45),
     )
 
     fig = go.Figure(data=data, layout=layout)
     py.plot(fig, filename='bar-direct-labels')
 
+# Generate Graph2
 def generate_cities_counts():
     conn = sqlite3.connect(DBNAME)
     cur = conn.cursor()
@@ -104,12 +101,10 @@ def generate_cities_counts():
     fig = go.Figure(data=data, layout=layout)
     py.plot(fig, filename='grouped-bar')
 
+# Generate Graph 3
 def generate_scatter_sheet():
     conn = sqlite3.connect(DBNAME)
     cur = conn.cursor()
-
-    #option = {1:"Chicago", 2:"New York City", 3:"San Francisco", 4:"Washington DC"}
-    #city_name = option[num]
 
     statement = """
         SELECT [Cuisine Type], AVG(Rating)
@@ -239,6 +234,7 @@ def generate_scatter_sheet():
     fig = go.Figure(data=data, layout=layout)
     py.plot(fig, filenmae='basic_dot-plot')
 
+# Generate Graph 4
 def generat_price_chart():
     conn = sqlite3.connect(DBNAME)
     cur = conn.cursor()
